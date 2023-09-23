@@ -1,0 +1,34 @@
+<div class="body">
+    <p-toast position="top-center" key="tc"></p-toast>
+    <h1 class="header">XO GAME</h1>
+    <div class="">
+        <p-button type="button" (click)="showDialog()">Enter name</p-button>
+        <div class="bg-primary font-bold border-round m-2 flex align-items-center justify-content-center">
+            <p-dialog header="Enter name : " [(visible)]="displayDialog" [modal]="true">
+                <ng-template pTemplate="content">
+                    <input type="text" placeholder="Player1" [(ngModel)]="nameIn1" />
+                    <input class="ml-2" type="text" placeholder="Player2" [(ngModel)]="nameIn2"/>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <button pButton type="button" (click)="saveInputText()">Save</button>
+                    <button pButton type="button" (click)="closeDialog()">Cancel</button>
+                </ng-template>
+            </p-dialog>
+        </div>
+    </div>
+    <div class="board">
+        <div *ngFor="let square of squares; let i = index" class="square" (click)="makeMove(i)">
+            {{ square }}
+        </div>
+    </div>
+    <div>
+        <p>Current Player: {{ namesArray[currentPlayer] }}</p>
+        <div *ngFor="let name of namesArray let i = index">Player {{i+1}}: {{ name }}</div>
+    </div>
+    <div *ngIf="winner">
+        <h2>Winner: {{ winner }}</h2>
+    </div>
+    <div class="card flex justify-content-center mt-2">
+        <button pButton pRipple  class="reset-button" (click)="reset()">Reset</button>
+    </div>
+</div>
